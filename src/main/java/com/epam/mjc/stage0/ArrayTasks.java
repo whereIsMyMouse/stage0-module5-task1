@@ -11,7 +11,8 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-
+        String[] seasons = new String[]{"winter", "spring", "summer", "autumn"};
+        return seasons;
     }
 
     /**
@@ -25,7 +26,11 @@ public class ArrayTasks {
      * length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-
+        int[] numbers = new int[length];
+        for (int i = 0; i < length; i++) {
+            numbers[i] = 1 + i;
+        }
+        return numbers;
     }
 
     /**
@@ -37,7 +42,11 @@ public class ArrayTasks {
      * arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-
+        int totalSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            totalSum += arr[i];
+        }
+        return totalSum;
     }
 
     /**
@@ -50,7 +59,14 @@ public class ArrayTasks {
      * arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-
+        int indexOf = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == number) {
+                indexOf = i;
+                break;
+            }
+        }
+        return indexOf;
     }
 
     /**
@@ -63,7 +79,11 @@ public class ArrayTasks {
      * arr = ["pineapple", "apple", "pen"] -> ["pen", "apple", "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-
+        String[] arrReverse = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            arrReverse[i] = arr[arr.length - i - 1];
+        }
+        return arrReverse;
     }
 
     /**
@@ -78,7 +98,22 @@ public class ArrayTasks {
      * arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
+        int countPositive = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                countPositive++;
+            }
+        }
+        int[] arrPositive = new int[countPositive];
+        int k = 0;
+        for (int j = 0; j < arr.length; j++) {
+            if (arr[j] > 0) {
+                arrPositive[k] = arr[j];
+                k++;
+            }
+        }
 
+        return arrPositive;
     }
 
     /**
@@ -93,5 +128,50 @@ public class ArrayTasks {
      */
     public int[][] sortRaggedArray(int[][] arr) {
 
+        int[][] arrLengthCounter = new int [2] [arr.length];
+        for (int k = 0; k < arr.length; k++) {
+            arrLengthCounter[0][k] = k;
+            arrLengthCounter[1][k] = arr[k].length;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            int tempLength;
+            int tempposition;
+            for (int j = i; j < arr.length; j++) {
+                if (arrLengthCounter[1][j] <= arrLengthCounter[1][i]) {
+                    tempLength = arrLengthCounter[1][i];
+                    arrLengthCounter[1][i] = arrLengthCounter[1][j];
+                    arrLengthCounter[1][j] = tempLength;
+                    tempposition = arrLengthCounter[0][i];
+                    arrLengthCounter[0][i] = arrLengthCounter[0][j];
+                    arrLengthCounter[0][j] = tempposition;
+                }
+            }
+        }
+
+        int[][] resultArray = new int [arr.length] [];
+        for (int i = 0; i < arr.length; i++) {
+            int index = arrLengthCounter[0][i];
+            resultArray[i] = arr[index];
+            resultArray[i] = sortInputArray(resultArray[i]);
+        }
+        return resultArray;
     }
+
+    public int[] sortInputArray(int[] inputArray) {
+        for (int i = 0; i < inputArray.length; i++) {
+            int tempPiece;
+            for (int j = i; j < inputArray.length; j++) {
+                if (inputArray[j] <= inputArray[i]) {
+                    tempPiece = inputArray[i];
+                    inputArray[i] = inputArray[j];
+                    inputArray[j] = tempPiece;
+                }
+            }
+        }
+        return inputArray;
+    }
+
+
 }
+
