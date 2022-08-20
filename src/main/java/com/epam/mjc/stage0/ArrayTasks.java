@@ -138,7 +138,7 @@ public class ArrayTasks {
             int tempLength;
             int tempposition;
             for (int j = i; j < arr.length; j++) {
-                if (arrLengthCounter[1][j] <= arrLengthCounter[1][i]) {
+                if (arrLengthCounter[1][j] < arrLengthCounter[1][i]) {
                     tempLength = arrLengthCounter[1][i];
                     arrLengthCounter[1][i] = arrLengthCounter[1][j];
                     arrLengthCounter[1][j] = tempLength;
@@ -162,7 +162,7 @@ public class ArrayTasks {
         for (int i = 0; i < inputArray.length; i++) {
             int tempPiece;
             for (int j = i; j < inputArray.length; j++) {
-                if (inputArray[j] <= inputArray[i]) {
+                if (inputArray[j] < inputArray[i]) {
                     tempPiece = inputArray[i];
                     inputArray[i] = inputArray[j];
                     inputArray[j] = tempPiece;
